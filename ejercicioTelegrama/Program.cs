@@ -1,5 +1,5 @@
 // MMR2627 - Práctica 1: Visual Studio y GitHub (Entornos de Desarrollo)
-// Paso 10: Código inicial con errores de depuración (Práctica 2.3)
+// Paso 14: Usuario 2 en rama MMR2627-nuevarama - Corrección de errores de depuración
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -61,7 +61,7 @@ namespace ejercicioTelegrama
             this.Controls.Add(this.cbUrgente);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPrecio);
-            this.Text = "Telegrama - MMR2627";
+            this.Text = "Telegrama - MMR2627 (Corregido)";
 
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -77,26 +77,40 @@ namespace ejercicioTelegrama
             // Leo el telegrama 
             textoTelegrama = txtTelegrama.Text;
 
-            // telegrama urgente?
+            // Telegrama urgente u ordinario
             if (cbUrgente.Checked)
                 tipoTelegrama = 'u';
+            else
+                tipoTelegrama = 'o';
 
-            // Obtengo el número de palabras que forma el telegrama numPalabras = textoTelegrama.Length;
+            // Obtengo el número de palabras que forman el telegrama
+            if (!string.IsNullOrWhiteSpace(textoTelegrama))
+            {
+                char[] separadores = new char[] { ' ', '\t', '\n', '\r' };
+                string[] palabras = textoTelegrama.Split(separadores, StringSplitOptions.RemoveEmptyEntries);
+                numPalabras = palabras.Length;
+            }
+
             // Si el telegrama es ordinario
             if (tipoTelegrama == 'o')
+            {
                 if (numPalabras <= 10)
-                    coste = 25;
+                    coste = 2.5;
                 else
-                    coste = 0.5 * numPalabras;
-            else
-            // Si el telegrama es urgente
-            if (tipoTelegrama == 'u')
+                    coste = 2.5 + 0.5 * (numPalabras - 10);
+            }
+            else if (tipoTelegrama == 'u')
+            {
+                // Si el telegrama es urgente
                 if (numPalabras <= 10)
                     coste = 5;
                 else
                     coste = 5 + 0.75 * (numPalabras - 10);
+            }
             else
+            {
                 coste = 0;
+            }
 
             txtPrecio.Text = coste.ToString() + " euros";
         }
