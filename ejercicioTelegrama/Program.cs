@@ -1,5 +1,5 @@
 // MMR2627 - Práctica 1: Visual Studio y GitHub (Entornos de Desarrollo)
-// Paso 19-20: Usuario 1 - Sustitución de CheckBox por RadioButtons (Ordinario y Urgente)
+// Paso 23: Usuario 2 - Actualización de tarifas: 3 euros ordinario y 6 euros urgente
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -71,7 +71,7 @@ namespace ejercicioTelegrama
             this.Controls.Add(this.rbUrgente);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPrecio);
-            this.Text = "Telegrama - MMR2627 (RadioButtons)";
+            this.Text = "Telegrama - MMR2627";
 
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -102,17 +102,17 @@ namespace ejercicioTelegrama
             if (tipoTelegrama == 'o')
             {
                 if (numPalabras <= 10)
-                    coste = 2.5;
+                    coste = 3;
                 else
-                    coste = 2.5 + 0.5 * (numPalabras - 10);
+                    coste = 3 + 0.5 * (numPalabras - 10);
             }
             else if (tipoTelegrama == 'u')
             {
                 // Si el telegrama es urgente
                 if (numPalabras <= 10)
-                    coste = 5;
+                    coste = 6;
                 else
-                    coste = 5 + 0.75 * (numPalabras - 10);
+                    coste = 6 + 0.75 * (numPalabras - 10);
             }
             else
             {
