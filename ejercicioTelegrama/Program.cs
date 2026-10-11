@@ -1,5 +1,5 @@
 // MMR2627 - Práctica 1: Visual Studio y GitHub (Entornos de Desarrollo)
-// Paso 14: Usuario 2 en rama MMR2627-nuevarama - Corrección de errores de depuración
+// Paso 19-20: Usuario 1 - Sustitución de CheckBox por RadioButtons (Ordinario y Urgente)
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -20,7 +20,8 @@ namespace ejercicioTelegrama
     public partial class Form1 : Form
     {
         private TextBox txtTelegrama;
-        private CheckBox cbUrgente;
+        private RadioButton rbOrdinario;
+        private RadioButton rbUrgente;
         private TextBox txtPrecio;
         private Button button1;
 
@@ -32,7 +33,8 @@ namespace ejercicioTelegrama
         private void InitializeComponent()
         {
             this.txtTelegrama = new TextBox();
-            this.cbUrgente = new CheckBox();
+            this.rbOrdinario = new RadioButton();
+            this.rbUrgente = new RadioButton();
             this.txtPrecio = new TextBox();
             this.button1 = new Button();
             this.SuspendLayout();
@@ -41,9 +43,16 @@ namespace ejercicioTelegrama
             this.txtTelegrama.Location = new Point(12, 12);
             this.txtTelegrama.Size = new Size(260, 20);
 
-            // cbUrgente
-            this.cbUrgente.Location = new Point(12, 40);
-            this.cbUrgente.Text = "Urgente";
+            // rbOrdinario
+            this.rbOrdinario.Location = new Point(12, 40);
+            this.rbOrdinario.Text = "Ordinario";
+            this.rbOrdinario.AutoSize = true;
+            this.rbOrdinario.Checked = true;
+
+            // rbUrgente
+            this.rbUrgente.Location = new Point(110, 40);
+            this.rbUrgente.Text = "Urgente";
+            this.rbUrgente.AutoSize = true;
 
             // button1
             this.button1.Location = new Point(12, 70);
@@ -58,10 +67,11 @@ namespace ejercicioTelegrama
             // Form1
             this.ClientSize = new Size(300, 150);
             this.Controls.Add(this.txtTelegrama);
-            this.Controls.Add(this.cbUrgente);
+            this.Controls.Add(this.rbOrdinario);
+            this.Controls.Add(this.rbUrgente);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPrecio);
-            this.Text = "Telegrama - MMR2627 (Corregido)";
+            this.Text = "Telegrama - MMR2627 (RadioButtons)";
 
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -77,11 +87,8 @@ namespace ejercicioTelegrama
             // Leo el telegrama 
             textoTelegrama = txtTelegrama.Text;
 
-            // Telegrama urgente u ordinario
-            if (cbUrgente.Checked)
-                tipoTelegrama = 'u';
-            else
-                tipoTelegrama = 'o';
+            // Selección por RadioButtons
+            tipoTelegrama = rbUrgente.Checked ? 'u' : 'o';
 
             // Obtengo el número de palabras que forman el telegrama
             if (!string.IsNullOrWhiteSpace(textoTelegrama))
